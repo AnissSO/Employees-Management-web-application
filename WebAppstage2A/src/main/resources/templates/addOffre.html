@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml"
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<link rel="stylesheet"
+	    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+	    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+	    crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	
+	<title>Créer un questionnaire</title>
+
+	</head>
+	<body>
+
+	<div class="bg-dark">
+        	<div class="container">
+        		<div class="row">
+        			<nav class="col navbar navbar-expand-lg navbar-dark bg-dark">
+						<a class="navbar-brand" href="#">
+							<img src="ressource/logoHRMS.png" width="45" height="45" alt="logo"/>
+							Application web de gestion des employés
+						</a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            				<span class="navbar-toggler-icon"></span>
+						</button>
+						<div id="navbarContent" class="collapse navbar-collapse">
+							<ul class="navbar-nav ">
+			      				<li class="nav-item active">
+			      					<a class="nav-link" th:href="@{/adminHomePage}">Entreprise</a>
+			      				</li>
+			     			    <li class="nav-item">
+			     			    	<a class="nav-link" th:href="@{/connexion}">Congé</a>
+			     			    </li>
+			     			    <li class="nav-item">
+			     			    	<a class="nav-link" th:href="@{/connexion}">Recrutement</a>
+			     			    </li>
+    			 			</ul>
+    			 		</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+
+
+	<div class="container">
+		<div class="row my-3">
+			<div class="col">
+				<h2><font face="Times New Roman" color="#443c99">Ajout d'une nouvelle offre</font></h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+			<form method="post"
+				th:action="@{/addNewOffre}" th:object="${newOffre}">
+				  <!--
+				<div class="form-group">
+					<input
+						type="hidden" th:field="*{status}" class="form-control" id="QuestionText1" 
+						th:value="${statu}" placeholder="Saisir le nom"> 
+				</div>
+				
+				
+				<div class="form-group">
+					<input
+						type="hidden" th:field="*{datedebut}" class="form-control" id="QuestionText" 
+						th:value="${datee}" placeholder="Saisir le nom"> 
+				</div>
+				-->
+				<div class="form-group">
+					<label for="surveyNameInput">Nom du poste vacant: </label> 
+					<input
+						type="text" th:field="*{nompostevacant}" class="form-control" id="surveyNameInput"
+						aria-describedby="surveyNameHelp" placeholder="Saisir le nom du poste vacant"> <small
+						id="surveyNameHelp" class="form-text text-muted">Merci d'écrire le nom du poste vacant.</small>
+				</div>
+				<div class="form-group">
+					<label for="surveyNameInput1">Description : </label> 
+					<input
+						type="text" th:field="*{descriptionpostevacant}" class="form-control" id="surveyNameInput1"
+						aria-describedby="surveyNameHelp" placeholder="Saisir une description de l'offre"> <small
+						id="surveyNameHelp" class="form-text text-muted">Merci d'écrire une description de l'offre.</small>
+				</div>
+				
+				
+				<!--  -->
+				<div class="form-group">
+					<label for="PublicAvailability">Nom du poste qui correspond à cette offre: </label> 
+					<select th:field="*{postecode}" id="PublicAvailability" class="form-control">
+						<option th:each="poste: ${listPostes}" th:value="${poste.postecode}" th:utext="${poste.postenom}"></option>
+					</select>
+					<small
+						id="categoryHelp" class="form-text text-muted">Merci de spécifier le poste correspondant à cette offre.</small>
+				</div>
+				
+				
+				<button type="submit" class="btn btn-primary">Créer</button>
+			</form>
+		</div>
+		
+		</div>
+		<br /> 
+	</div>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+</body>
+</html>

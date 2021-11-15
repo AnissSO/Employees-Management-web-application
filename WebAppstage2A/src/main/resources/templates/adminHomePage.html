@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+    crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript">
+		function checkDelete(){
+    		return confirm('Are you sure?');
+		}
+	</script>
+        <title>Application web de gestion des employés</title>
+        <style>
+			.footer {
+			  position: fixed;
+			  left: 0;
+  			  bottom: 0;
+  			  width: 100%;
+			  text-align: center;
+			}
+		</style>
+       
+    </head>
+    <body>
+        <div class="bg-dark">
+        	<div class="container">
+        		<div class="row">
+        			<nav class="col navbar navbar-expand-lg navbar-dark bg-dark">
+						<a class="navbar-brand" href="#">
+							<img src="ressource/logoHRMS.png" width="45" height="45" alt="logo"/>
+							Application web de gestion des employés
+						</a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            				<span class="navbar-toggler-icon"></span>
+						</button>
+						<div id="navbarContent" class="collapse navbar-collapse">
+							<ul class="navbar-nav ">
+			      				<li class="nav-item active">
+			      					<a class="nav-link" th:href="@{/adminHomePage}">Entreprise</a>
+			      				</li>
+			     			    <li class="nav-item">
+			     			    	<a class="nav-link" th:href="@{/conge}">Congé</a>
+			     			    </li>
+			     			    <li class="nav-item">
+			     			    	<a class="nav-link" th:href="@{/recrutement}">Recrutement</a>
+			     			    </li>
+    			 			</ul>
+    			 		</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+		
+	<div class="container">
+		
+		<div class="container pt-3">
+		
+		<h2 class="underlined"><font face="Times New Roman" color="#443c99">Informations de l'entreprise : </font></h2>
+	   
+								
+	    <span><b>Nom : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+	    					<span th:text="${entreprise.nom}"></span><br/>
+	    <span><b>Adresse 1 : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	    					<span th:text="${entreprise.adresse1}"></span><br/>
+	    <span><b>Adresse 2 : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	    					<span th:text="${entreprise.adresse2}"></span><br/>
+	    <span><b>Région : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+	    					<span th:text="${entreprise.region}"></span><br/>
+	    <span><b>Ville : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
+	    					<span th:text="${entreprise.ville}"></span><br/>
+	    <span><b>Pays : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
+	    					<span th:text="${entreprise.pays}"></span><br/>					
+	    <span><b>Code postal : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	    					<span th:text="${entreprise.codepostal}"></span><br/>						   	   
+		<span><b>Téléphone : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
+	    					<span th:text="${entreprise.telephone}"></span><br/>
+		<span><b>Fax : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	    					<span th:text="${entreprise.fax}"></span><br/>
+	    <span><b>Description : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+	    					<span th:text="${entreprise.description}"></span><br/>
+	    <br />
+	    <div class="row mb-3">
+			<div class="col">
+				<a th:href="@{/editEntreprise}"><button type="button" class="btn btn-info">Modifier les informations <i class="fa fa-edit" aria-hidden="true"></i></button></a>
+			</div>
+		</div>
+		<div class="container pt-3">
+		<h2 class="underlined"><font face="Times New Roman" color="#443c99">Départements de l'entreprise : </font></h2>
+		<div class="row">
+		<div class="table-responsive">
+			<table class="table table-striped table-sm table-bordered">
+				<thead>
+					<tr>
+						<th>Nom du département</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="survey: ${listDepartements}">
+						
+						<td><span th:text="${survey.nomdepartement}"> </span></td>
+						
+						<td>
+							<a th:href="@{/showDepartement/{id}(id=${survey.numdepartement})}"><button type="button" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+						
+							<a onclick="return checkDelete()" th:href="@{/deleteDepartement/{id}(id=${survey.numdepartement})}"><button class="btn btn-danger"><i class="fa fa-trash"></i></button></a>						
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			
+			<div class="row mb-3">
+			<div class="col">
+				<a th:href="@{/addDepartement}"><button type="button" class="btn btn-info">Ajouter un département</button></a>
+			</div>
+			</div>
+			
+		</div>
+	</div>
+	<br />
+	<div class="container pt-3">
+		<h2 class="underlined"><font face="Times New Roman" color="#443c99">Postes de l'entreprise : </font></h2>
+		<div class="row">
+		<div class="table-responsive">
+			<table class="table table-striped table-sm table-bordered">
+				<thead>
+					<tr>
+						<th>Nom du poste</th>
+						<th>Actif</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="survey: ${listPostes}">
+						
+						<td><span th:text="${survey.postenom}"> </span></td>
+						<td>
+							<span th:if="${survey.estactif == 1}"> Oui </span>
+							<span th:if="${survey.estactif == 0}"> Non </span>
+						</td>
+						
+						<td>
+							<a onclick="return checkDelete()" th:href="@{/deletePoste/{id}(id=${survey.postecode})}"><button class="btn btn-danger"><i class="fa fa-trash"></i></button></a>						
+						
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			<div class="row mb-3">
+			<div class="col">
+				<a th:href="@{/addPoste}"><button type="button" class="btn btn-info">Ajouter un poste</button></a>
+			</div>
+			</div>
+			
+		</div>
+	</div>
+	<br />
+	<div class="container pt-3">
+		<h2 class="underlined"><font face="Times New Roman" color="#443c99">Employés de l'entreprise : </font></h2>
+		<div class="row">
+		<div class="table-responsive">
+			<table class="table table-striped table-sm table-bordered">
+				<thead>
+					<tr>
+						<th>Nom de l'employé</th>
+						<th>poste</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="survey: ${listEmployes}">
+						
+						<td><span th:text="${survey.prenom}"> </span> <span th:text="${survey.nom}"> </span></td>
+						<td><span th:text="${survey.postenom}"> </span></td>
+						<!-- 
+						<td>
+							<span th:if="${survey.estactif == 1}"> Oui </span>
+							<span th:if="${survey.estactif == 0}"> Non </span>
+						</td>
+						 -->
+						<td>
+							<a th:href="@{/showEmploye/{id}(id=${survey.id_employe})}"><button type="button" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+							<a th:href="@{/editEmploye/{id}(id=${survey.id_employe})}"><button type="button" class="btn btn-info"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
+							<a onclick="return checkDelete()" th:href="@{/deleteEmploye/{id}(id=${survey.id_employe})}"><button class="btn btn-danger"><i class="fa fa-trash"></i></button></a>						
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			<div class="row mb-3">
+			<div class="col">
+				<a th:href="@{/addEmploye}"><button type="button" class="btn btn-info">Ajouter un employé</button></a>
+			</div>
+			</div>
+			
+		</div>
+	</div>
+	<br />
+	<div class="container pt-3">
+		<h2 class="underlined"><font face="Times New Roman" color="#443c99">Projets de l'entreprise : </font></h2>
+		<div class="row">
+		<div class="table-responsive">
+			<table class="table table-striped table-sm table-bordered">
+				<thead>
+					<tr>
+						<th>Nom du projet</th>
+						<th>Nom du client</th>
+						<th>Etat</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="survey: ${listProjets}">
+						
+						<td><span th:text="${survey.nomprojet}"></span></td>
+						<td><span th:text="${survey.nomclient}"></span></td>
+						<!-- -->
+						<td>
+							<span th:if="${survey.etat == 1}"> En cours </span>
+							<span th:if="${survey.etat == 0}"> Terminé </span>
+						</td>
+						 
+						<td>
+							<a onclick="return checkDelete()" th:href="@{/deleteProjet/{id}(id=${survey.id_projet})}"><button class="btn btn-danger"><i class="fa fa-trash"></i></button></a>						
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			<div class="row mb-3">
+			<div class="col">
+				<a th:href="@{/addProjet}"><button type="button" class="btn btn-info">Ajouter un projet</button></a>
+			</div>
+			</div>
+			
+		</div>
+	</div>
+	</div>
+		
+	
+		
+		
+		<br />
+		<br />
+		<br />
+	</div>
+	<div class="footer">
+	<div class="bg-light mt-4">
+		<div class="container">
+			<div class="row pt-4 pb-3">
+				<div class="col">
+					
+					<ul class="list-inline text-center">
+						<li class="list-inline-item"><a href="#">À propos</a></li>
+						<li class="list-inline-item">&middot;</li>
+						<li class="list-inline-item"><a href="#">Vie privée</a></li>
+						<li class="list-inline-item">&middot;</li>
+						<li class="list-inline-item"><a href="#">Conditions d'utilisations</a></li>
+					</ul>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	
+	
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+    </body>
+</html>

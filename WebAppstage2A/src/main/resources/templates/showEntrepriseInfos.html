@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml"
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+    crossorigin="anonymous">
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+	<title>Informations de l'entreprise</title>
+	
+	<script type="text/javascript">
+		function checkDelete(){
+    		return confirm('Are you sure?');
+		}
+	</script>
+		
+	
+	</head>
+	<body>
+	
+	<div class="bg-dark">
+        	<div class="container">
+        		<div class="row">
+        			<nav class="col navbar navbar-expand-lg navbar-dark bg-dark">
+						<a class="navbar-brand" href="#">
+							<img src="ressource/logoHRMS.png" width="45" height="45" alt="logo"/>
+							Application web de gestion des employés
+						</a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            				<span class="navbar-toggler-icon"></span>
+						</button>
+						<div id="navbarContent" class="collapse navbar-collapse">
+							<ul class="navbar-nav ">
+			      				<li class="nav-item active">
+			      					<a class="nav-link" th:href="@{/}">Accueil</a>
+			      				</li>
+			     			    <li class="nav-item">
+			     			    	<a class="nav-link" th:href="@{/connexion}">Connexion</a>
+			     			    </li>
+    			 			</ul>
+    			 		</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+		
+	<div class="container pt-3">
+		
+		<h2 class="underlined"><font face="Times New Roman" color="#443c99">Informations de l'entreprise : </font></h2>
+	   
+								
+	    <span><b>Nom : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+	    					<span th:text="${entreprise.nom}"></span><br/>
+	    <span><b>Adresse 1 : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	    					<span th:text="${entreprise.adresse1}"></span><br/>
+	    <span><b>Adresse 2 : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	    					<span th:text="${entreprise.adresse2}"></span><br/>
+	    <span><b>Région : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+	    					<span th:text="${entreprise.region}"></span><br/>
+	    <span><b>Ville : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
+	    					<span th:text="${entreprise.ville}"></span><br/>
+	    <span><b>Pays : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
+	    					<span th:text="${entreprise.pays}"></span><br/>					
+	    <span><b>Code postal : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	    					<span th:text="${entreprise.codepostal}"></span><br/>						   	   
+		<span><b>Téléphone : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
+	    					<span th:text="${entreprise.telephone}"></span><br/>
+		<span><b>Fax : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	    					<span th:text="${entreprise.fax}"></span><br/>
+	    <span><b>Description : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+	    					<span th:text="${entreprise.description}"></span><br/>
+	    <br />
+	    <div class="container pt-3">
+		<h2 class="underlined"><font face="Times New Roman" color="#443c99">Départements de l'entreprise : </font></h2>
+		<div class="row">
+		<div class="table-responsive">
+			<table class="table table-striped table-sm table-bordered">
+				<thead>
+					<tr>
+						<th>Nom du département</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="survey: ${listDepartements}">
+						
+						<td><span th:text="${survey.nomdepartement}"> </span></td>
+						
+						<td>
+							<a th:href="@{/showDepartementHome/{id}(id=${survey.numdepartement})}"><button type="button" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+						
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			
+			
+		</div>
+	</div>
+	<br />
+	
+	    <br />
+	    
+	    <a th:href="@{/}"><button type="button" class="btn btn-info">Retour</button></a>
+									
+		<br />
+	  
+	</div>
+	<br />
+	
+	<br />
+	
+	</body>
+</html>

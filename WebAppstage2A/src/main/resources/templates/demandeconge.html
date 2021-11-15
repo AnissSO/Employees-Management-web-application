@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+    crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript">
+		function checkDelete(){
+    		return confirm('Are you sure?');
+		}
+	</script>
+        <title>Application web de gestion des employés</title>
+        <style>
+			.footer {
+			  position: fixed;
+			  left: 0;
+  			  bottom: 0;
+  			  width: 100%;
+			  text-align: center;
+			}
+		</style>
+       
+    </head>
+    <body>
+        <div class="bg-dark">
+        	<div class="container">
+        		<div class="row">
+        			<nav class="col navbar navbar-expand-lg navbar-dark bg-dark">
+						<a class="navbar-brand" href="#">
+							<img src="/ressource/logoHRMS.png" width="45" height="45" alt="logo"/>
+							Application web de gestion des employés
+						</a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            				<span class="navbar-toggler-icon"></span>
+						</button>
+						<div id="navbarContent" class="collapse navbar-collapse">
+							<ul class="navbar-nav ">
+			      				<li class="nav-item ">
+			      					<a class="nav-link" th:href="@{/homeUser/{id}(id=${employe.id_employe})}">Mon Compte</a>
+			      				</li>
+			     			    <li class="nav-item active">
+			     			    	<a class="nav-link" th:href="@{/congeUser/{id}(id=${employe.id_employe})}">Congé</a>
+			     			    </li>
+    			 			</ul>
+    			 		</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+		
+	<div class="container">
+		
+		<div class="container pt-3">
+		
+		<h2 class="underlined"><font face="Times New Roman" color="#443c99">Demande de congé exceptionnel</font></h2>
+	   
+						
+	    <br />
+	    <div class="row">
+			<div class="col">
+			<form method="post"
+				th:action="@{/addDemandeConge}" th:object="${congedemande}">
+				  <!---->
+				<div class="form-group">
+					<input
+						type="hidden" th:field="*{id_employe}" class="form-control" id="QuestionText1" 
+						th:value="${idemploy}" placeholder="Saisir le nom"> 
+				</div>
+				
+				<!--  
+				<div class="form-group">
+					<input
+						type="hidden" th:field="*{datedebut}" class="form-control" id="QuestionText" 
+						th:value="${datee}" placeholder="Saisir le nom"> 
+				</div>
+				
+				<div class="form-group">
+					<label for="surveyNameInput">Nom : </label> 
+					<input
+						type="text" th:field="*{nom}" class="form-control" id="surveyNameInput"
+						aria-describedby="surveyNameHelp" placeholder="Saisir le nom de l'employé"> <small
+						id="surveyNameHelp" class="form-text text-muted">Merci d'écrire le nom de l'employé.</small>
+				</div>
+				<div class="form-group">
+					<label for="surveyNameInput1">Prénom : </label> 
+					<input
+						type="text" th:field="*{prenom}" class="form-control" id="surveyNameInput1"
+						aria-describedby="surveyNameHelp" placeholder="Saisir le prénom de l'employé"> <small
+						id="surveyNameHelp" class="form-text text-muted">Merci d'écrire le prénom de l'employé.</small>
+				</div>
+				<div class="form-group">
+					<label for="surveyNameInput2">Numéro de téléphone : </label> 
+					<input
+						type="text" th:field="*{numtelephone}" class="form-control" id="surveyNameInput2"
+						aria-describedby="surveyNameHelp" placeholder="Saisir le numéro de téléphone de l'employé"> <small
+						id="surveyNameHelp" class="form-text text-muted">Merci d'écrire le numéro de téléphone de l'employé.</small>
+				</div>
+				-->
+				<!--  -->
+				<div class="form-group">
+					<label for="PublicAvailability">Type du congé : </label> 
+					<select th:field="*{congetypecode}" id="PublicAvailability" class="form-control">
+						<option th:each="poste: ${listConges}" th:value="${poste.congetypecode}" th:utext="${poste.congetypenom} + ' : ' + ${poste.congetypedescription}" th:if="${poste.congetypecode != '1'}"></option>
+					</select>
+					<small
+						id="categoryHelp" class="form-text text-muted">Merci de spécifier le type de congé que vous demandez.</small>
+				</div>
+				<!--  
+				<div class="form-group">
+					<label for="categoryInput">Situation d'emploi : </label> 
+					<select th:field="*{situationemploi}" id="categoryInput" class="form-control">
+						<option th:value="CDD">CDD</option>
+						<option th:value="CDI">CDI</option>
+						<option th:value="Freelance">Freelance</option>
+						<option th:value="Stagiaire">Stagiaire</option>
+					</select>
+					<small
+						id="categoryHelp" class="form-text text-muted">Merci de spécifier la situation d'emploi de l'employé.</small>
+				</div>
+				-->
+				<div class="form-group">
+					<label for="surveyNameInput7">Date de début du congé : </label> 
+					<!-- --> 
+					<input
+						type="date" th:field="*{datedebutconge}" class="form-control" id="surveyNameInput7"
+						aria-describedby="surveyNameHelp" placeholder="Saisir la date de début du congé"> <small
+						id="surveyNameHelp" class="form-text text-muted">Merci d'écrire la date de début du congé.</small>
+					
+					
+				</div>
+				
+				<div class="form-group">
+					<label for="surveyNameInput8">Commentaire : </label> 
+					<input
+						type="text" th:field="*{congecommentaire}" class="form-control" id="surveyNameInput8"
+						aria-describedby="surveyNameHelp" placeholder="Saisir un commentaire"> <small
+						id="surveyNameHelp" class="form-text text-muted">Merci d'écrire un commentaire si nécessaire.</small>
+				</div>
+				
+				<button type="submit" class="btn btn-primary">Créer</button>
+			</form>
+		</div>
+		
+		</div>
+		
+	
+	
+	
+	</div>
+		
+	
+		
+		
+		<br />
+		<br />
+		<br />
+	</div>
+	<div class="footer">
+	<div class="bg-light mt-4">
+		<div class="container">
+			<div class="row pt-4 pb-3">
+				<div class="col">
+					
+					<ul class="list-inline text-center">
+						<li class="list-inline-item"><a href="#">À propos</a></li>
+						<li class="list-inline-item">&middot;</li>
+						<li class="list-inline-item"><a href="#">Vie privée</a></li>
+						<li class="list-inline-item">&middot;</li>
+						<li class="list-inline-item"><a href="#">Conditions d'utilisations</a></li>
+					</ul>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	
+	
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+    </body>
+</html>

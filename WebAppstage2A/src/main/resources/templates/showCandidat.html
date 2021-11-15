@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml"
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<link rel="stylesheet"
+	    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+	    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+	    crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	
+	<title>Créer un questionnaire</title>
+
+	</head>
+	<body>
+
+	<div class="bg-dark">
+        	<div class="container">
+        		<div class="row">
+        			<nav class="col navbar navbar-expand-lg navbar-dark bg-dark">
+						<a class="navbar-brand" href="#">
+							<img src="/ressource/logoHRMS.png" width="45" height="45" alt="logo"/>
+							Application web de gestion des employés
+						</a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            				<span class="navbar-toggler-icon"></span>
+						</button>
+						
+					</nav>
+				</div>
+			</div>
+		</div>
+
+
+	<div class="container pt-3">
+				<h2><font face="Times New Roman" color="#443c99">Postulation pour l'offre :</font></h2>
+		
+		<span><b>Nom de l'offre : </b></span>&emsp;&emsp;&emsp;&emsp;<span th:text="${offre.nompostevacant}"></span><br/>
+	    <span><b>Description : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+	    					<span th:text="${offre.descriptionpostevacant}"></span><br/>
+	    <span><b>Date de création : </b></span>&emsp;&emsp;&emsp;
+	    					<span th:text="${offre.datedecreation}"></span><br/>
+	    <br/>
+	    <h2><font face="Times New Roman" color="#443c99">Informations du candidat :</font></h2>
+	    
+	    <span><b>Nom du candidat : </b></span>&emsp;&emsp;&nbsp;&nbsp;&nbsp;<span th:text="${candidat.nom}"></span> <span th:text="${candidat.prenom}"></span><br/>
+	    <span><b>Email : </b></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	    					<span th:text="${candidat.email}"></span><br/>
+	    <span><b>Numéro de téléphone : </b></span>&nbsp;
+	    					<span th:text="${candidat.numtelephone}"></span><br/>
+	    <span><b>Commentaire : </b></span>&emsp;&emsp;&emsp;&emsp;&nbsp;
+	    					<span th:text="${candidat.commentaire}"></span><br/>
+	    <span><b>Date de postulation : </b></span>&emsp;&nbsp;
+	    					<span th:text="${candidat.datedepostulation}"></span><br/>
+	    					
+	    <br/>
+		<div class="container pt-3">
+		<h2 class="underlined"><font face="Times New Roman" color="#443c99">L'historique du candidat : </font></h2>
+		<div class="row">
+		<div class="table-responsive">
+			<table class="table table-striped table-sm table-bordered">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="survey: ${listhce}">
+						
+						<td><span th:text="${survey.dateaction}"></span></td>
+						<td>
+							<span th:if="${survey.action == 1}"><span th:text="${candidat.nom}"></span> <span th:text="${candidat.prenom}"></span> a postulé pour l'offre <span th:text="${offre.nompostevacant}"></span></span>
+							<span th:if="${survey.action == 2}"><span th:text="${candidat.nom}"></span> <span th:text="${candidat.prenom}"></span> a été préselectionné pour l'offre <span th:text="${offre.nompostevacant}"></span></span>
+							<span th:if="${survey.action == 3}"><span th:text="${candidat.nom}"></span> <span th:text="${candidat.prenom}"></span> a été refusé pour l'offre <span th:text="${offre.nompostevacant}"></span></span>
+						
+						</td>
+						
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			<div class="row mb-3">
+			<div class="col">
+				<a th:href="@{/preselectionner/{id}(id=${candidat.id_candidat})}"><button type="button" class="btn btn-info">Préselectionner le candidat</button></a>
+				<a th:href="@{/refuserCandidat/{id}(id=${candidat.id_candidat})}"><button type="button" class="btn btn-info">Refuser le candidat</button></a>
+			</div>
+			</div>
+			
+			
+		</div>
+	</div>
+		<br /> 
+	</div>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+</body>
+</html>

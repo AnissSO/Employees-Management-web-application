@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml"
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<link rel="stylesheet"
+	    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+	    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+	    crossorigin="anonymous">
+								
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	
+	<title>Créer une question</title>
+
+	</head>
+	<body>
+
+	<div class="bg-dark">
+        	<div class="container">
+        		<div class="row">
+        			<nav class="col navbar navbar-expand-lg navbar-dark bg-dark">
+						<a class="navbar-brand" href="#">
+							<img src="/ressource/logoHRMS.png" width="45" height="45" alt="logo"/>
+							Application web de gestion des employés
+						</a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            				<span class="navbar-toggler-icon"></span>
+						</button>
+						
+					</nav>
+				</div>
+			</div>
+		</div>
+
+
+	<div class="container">
+		<div class="row my-3">
+			<div class="col">
+				<h2><font face="Times New Roman" color="#443c99"><span th:text="${congetype.congetypenom}"> </span></font></h2>
+			</div>
+		</div>
+		
+		<div class="row my-3">
+			<div class="col">
+				<h5><span th:text="${congetype.congetypedescription}"></span></h5>
+			</div>
+		</div>
+		<div class="row my-3" th:if="${code != '2' && code != '3'}">
+		<div class="col">
+				<label for="QuestionOption1">Nombre de jours : <span th:text="${congetype.nombrejours}"> </span></label> 
+		</div>
+		</div>
+		<div class="row my-3" th:if="${code == '2'}">
+		<div class="col">
+				<label for="QuestionOption1">Nombre d'heures : <span th:text="${congetype.nombreheures}"> </span></label> 
+		</div>
+		</div>
+		<div class="row my-3" th:if="${code == '3'}">
+		<div class="col">
+				<label for="QuestionOption1">Nombre de semaines avant accouchement : <span th:text="${congetype.nbresemavaccouchement}"> </span></label> 
+		</div>
+		</div>
+		<div class="row my-3" th:if="${code == '3'}">
+		<div class="col">
+				<label for="QuestionOption1">Nombre de semaines après accouchement : <span th:text="${congetype.nbresemapresaccouchement}"> </span></label> 
+		</div>
+		</div>
+		
+		
+		
+		
+		</div>
+		<br /> 
+	
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+</body>
+</html>

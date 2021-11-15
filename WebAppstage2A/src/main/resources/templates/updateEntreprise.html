@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml"
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<link rel="stylesheet"
+	    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+	    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+	    crossorigin="anonymous">
+								
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	
+	<title>Créer une question</title>
+
+	</head>
+	<body>
+
+	<div class="bg-dark">
+        	<div class="container">
+        		<div class="row">
+        			<nav class="col navbar navbar-expand-lg navbar-dark bg-dark">
+						<a class="navbar-brand" href="#">
+							<img src="ressource/logoHRMS.png" width="45" height="45" alt="logo"/>
+							Application web de gestion des employés
+						</a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            				<span class="navbar-toggler-icon"></span>
+						</button>
+						<div id="navbarContent" class="collapse navbar-collapse">
+							<ul class="navbar-nav ">
+			      				<li class="nav-item active">
+			      					<a class="nav-link" th:href="@{/adminHomePage}">Entreprise</a>
+			      				</li>
+			     			    <li class="nav-item">
+			     			    	<a class="nav-link" th:href="@{/connexion}">Congé</a>
+			     			    </li>
+			     			    <li class="nav-item">
+			     			    	<a class="nav-link" th:href="@{/connexion}">Recrutement</a>
+			     			    </li>
+    			 			</ul>
+    			 		</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+
+
+	<div class="container">
+		<div class="row my-3">
+			<div class="col">
+				<h2><font face="Times New Roman" color="#443c99">Mise à jour des informations de l'entreprise :</font></h2>
+			</div>
+		</div>
+		
+		<div class="row">		
+			<div class="col">
+			<!--  -->
+			<form method="post" th:action="@{/updateCompany}"  th:object="${entreprise}">	
+					
+					
+				    <div class="form-group">
+						<label for="QuestionOption1">Nom : </label> 
+						<input
+							type="text" th:field="*{nom}" class="form-control" id="QuestionOption1" 
+							aria-describedby="QuestionOption1Help" placeholder="Saisir le nom de l'entreprise"> <small
+							id="QuestionOption1Help" class="form-text text-muted">Merci de saisir le nom de l'entreprise.</small>
+					</div>
+					
+					<div class="form-group">
+						<label for="QuestionOption1">Adresse 1 : </label> 
+						<input
+							type="text" th:field="*{adresse1}" class="form-control" id="QuestionOption1" 
+							aria-describedby="QuestionOption1Help" placeholder="Saisir l'adresse 1"> <small
+							id="QuestionOption1Help" class="form-text text-muted">Merci de saisir l'adresse 1 de l'entreprise.</small>
+					</div>
+					
+					<div class="form-group">
+						<label for="QuestionOption1">Adresse 2 : </label> 
+						<input
+							type="text" th:field="*{adresse2}" class="form-control" id="QuestionOption1" 
+							aria-describedby="QuestionOption1Help" placeholder="Saisir l'adresse 2"> <small
+							id="QuestionOption1Help" class="form-text text-muted">Merci de saisir l'adresse 2 de l'entreprise.(S'il y en a plusieurs)</small>
+					</div>
+					
+					<div class="form-group">
+						<label for="QuestionOption1">Région : </label> 
+						<input
+							type="text" th:field="*{region}" class="form-control" id="QuestionOption1" 
+							aria-describedby="QuestionOption1Help" placeholder="Saisir la région"> <small
+							id="QuestionOption1Help" class="form-text text-muted">Merci de saisir la région où se trouve l'entreprise.</small>
+					</div>
+					
+					<div class="form-group">
+						<label for="QuestionOption1">Ville : </label> 
+						<input
+							type="text" th:field="*{ville}" class="form-control" id="QuestionOption1" 
+							aria-describedby="QuestionOption1Help" placeholder="Saisir la ville"> <small
+							id="QuestionOption1Help" class="form-text text-muted">Merci de saisir la ville où se trouve l'entreprise.</small>
+					</div>
+					
+					<div class="form-group">
+						<label for="QuestionOption1">Pays : </label> 
+						<input
+							type="text" th:field="*{pays}" class="form-control" id="QuestionOption1" 
+							aria-describedby="QuestionOption1Help" placeholder="Saisir le pays"> <small
+							id="QuestionOption1Help" class="form-text text-muted">Merci de saisir le pays où se trouve l'entreprise.</small>
+					</div>
+					
+					<div class="form-group">
+						<label for="QuestionOption1">Code postal : </label> 
+						<input
+							type="text" th:field="*{codepostal}" class="form-control" id="QuestionOption1" 
+							aria-describedby="QuestionOption1Help" placeholder="Saisir le code postal"> <small
+							id="QuestionOption1Help" class="form-text text-muted">Merci de saisir le code postal de l'entreprise.</small>
+					</div>
+					
+					<div class="form-group">
+						<label for="QuestionOption1">Téléphone : </label> 
+						<input
+							type="text" th:field="*{telephone}" class="form-control" id="QuestionOption1" 
+							aria-describedby="QuestionOption1Help" placeholder="Saisir le numéro du téléphone"> <small
+							id="QuestionOption1Help" class="form-text text-muted">Merci de saisir le numéro de téléphone de l'entreprise.</small>
+					</div>
+					
+					<div class="form-group">
+						<label for="QuestionOption1">Fax : </label> 
+						<input
+							type="text" th:field="*{fax}" class="form-control" id="QuestionOption1" 
+							aria-describedby="QuestionOption1Help" placeholder="Saisir le fax"> <small
+							id="QuestionOption1Help" class="form-text text-muted">Merci de saisir le fax de l'entreprise.</small>
+					</div>
+					
+					<div class="form-group">
+						<label for="QuestionOption1">Description : </label> 
+						<input
+							type="text" th:field="*{description}" class="form-control" id="QuestionOption1" 
+							aria-describedby="QuestionOption1Help" placeholder="Saisir la description"> <small
+							id="QuestionOption1Help" class="form-text text-muted">Merci de saisir une description de l'entreprise.</small>
+					</div>
+					
+					
+					<button type="submit" class="btn btn-primary">Valider</button>
+					
+			  </form>
+
+		</div>
+		
+	</div>
+		
+		</div>
+		<br /> 
+	
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+</body>
+</html>
